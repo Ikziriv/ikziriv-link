@@ -1,0 +1,43 @@
+---
+export type Props = {
+	title?: string;
+	type?: string
+	description?: string;
+	overrideTitle?: boolean
+	canonical?: string
+	date?: string
+	sharingImageUrl?: string
+}
+
+const { 
+    title,
+	sharingImageUrl,
+	type,
+	description,
+	canonical,
+	date 
+} = Astro.props as Props;
+
+const url = Astro.url.toString()
+---
+<head>
+    <meta name="description" content={description} />
+    <meta property="og:url" content={url} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:image" content={sharingImageUrl} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Ikziriv Art" />
+    <meta name="twitter:site" content="@akellbl4" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="author" content="Ikziriv Art" />
+    <link href={canonical} rel="canonical" />
+    {date &&
+    <meta property="article:published_time" content={date} />}
+    <link href="/favicon.ico" rel="icon" />
+    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+    <link href="/favicon-mask.svg" rel="mask-icon" color="#ce6fea" />
+    <link href="/touch-180x180.png" rel="apple-touch-icon" />
+    <link href="/manifest.json" rel="manifest" />
+    <meta content="#ce6fea" name="theme-color" />
+</head>

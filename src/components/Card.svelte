@@ -1,6 +1,5 @@
 <script lang="ts">
-import { destroy_component, each } from "svelte/internal";
-
+    import { destroy_component, each } from "svelte/internal";
 
     type Link = {
         title: string;
@@ -43,7 +42,6 @@ import { destroy_component, each } from "svelte/internal";
         </p>
     </div>
     <div class="w-auto h-auto">
-        
     </div>
 </div>
 {/each}

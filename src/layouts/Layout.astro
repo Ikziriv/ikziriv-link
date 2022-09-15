@@ -1,9 +1,23 @@
 ---
-export interface Props {
-	title: string;
-}
+import '../styles/index.css';
+import SEO from '../components/SEO.astro';
 
-const { title } = Astro.props;
+const { pathname } = Astro.url
+const isHome = pathname === '/';
+const baseUrl = "https://link.ikziriv.com"
+
+let {
+	title = "Ikziriv Art",
+	sharingImageUrl = '/sharing.png',
+	type = 'website',
+	description = "Hi, I'm Ikziriv and you found my zone on the this site. Here you can find information about my activity on the Internet and far more.",
+	canonical,
+	date,
+} = Astro.props;
+
+if (!isHome) {
+	title = `${title} - Ikziriv Art`
+}
 ---
 
 <!DOCTYPE html>
@@ -14,8 +28,9 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<SEO {title} {sharingImageUrl} {type} {description} {canonical} {date} />
 	</head>
-	<body class="bg-zinc-50">
+	<body class={`preload-transitions bg-white text-zinc-800 dark:text-zinc-200 dark:bg-zinc-900 antialiased${isHome ? " flex items-center" : '' }`}>
 		<slot />
 	</body>
 </html>
