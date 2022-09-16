@@ -1,10 +1,27 @@
 ---
 import '../styles/index.css';
 import SEO from '../components/SEO.astro';
+import { MAXIMUM_THEME_INDEX } from "../constants";
+import { getThemeCookie } from "../utils/theme";
 
 const { pathname } = Astro.url
 const isHome = pathname === '/';
 const baseUrl = "https://link.ikziriv.com"
+const theme_ = getThemeCookie(Astro.request.headers);
+
+export interface Props {
+  title: string;
+  sharingImageUrl?: string;
+  type?: string;
+  description?: string;
+  canonical?: string;
+  date?: string;
+  maxThemeIndex?: number;
+  theme?: {
+    mode: "dark-theme" | "light-theme";
+    theme: number;
+  } | null;
+}
 
 let {
 	title = "Ikziriv Art",
@@ -13,7 +30,9 @@ let {
 	description = "Hi, I'm Ikziriv and you found my zone on the this site. Here you can find information about my activity on the Internet and far more.",
 	canonical,
 	date,
-} = Astro.props;
+  	maxThemeIndex = MAXIMUM_THEME_INDEX,
+  	theme = theme_,
+} = Astro.props as Props;
 
 if (!isHome) {
 	title = `${title} - Ikziriv Art`
@@ -21,16 +40,45 @@ if (!isHome) {
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html 
+	lang="en"
+	data-max-theme-index={maxThemeIndex}
+	data-theme={JSON.stringify(theme)}
+	class={theme?.mode ?? ""}
+	data-theme-index={theme?.theme ?? 0}
+>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta content="#FFF" name="theme-color" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<SEO {title} {sharingImageUrl} {type} {description} {canonical} {date} />
+		<SEO 
+			title={title} 
+			sharingImageUrl={sharingImageUrl} 
+			type={type} 
+			description={description} 
+			canonical={canonical} 
+			date={date} 
+		/>
+
+		<script>
+		if (typeof window !== "undefined") {
+			const root = document.documentElement;
+			const theme = root.getAttribute("data-theme");
+			if (theme !== "null") {
+			document.cookie = `__theme_nfz=${theme}; SameSite=Lax; Secure; path=/`;
+			} else {
+			document.cookie = `__theme_nfz=${JSON.stringify({
+				mode: "light-theme",
+				theme: 0,
+			})}; SameSite=Lax; Secure; path=/`;
+			}
+		}
+		</script>
 	</head>
-	<body class={`preload-transitions bg-white text-zinc-800 dark:text-zinc-200 dark:bg-zinc-900 antialiased${isHome ? " flex items-center" : '' }`}>
+	<body class={`preload-transitions bg-transparent antialiased${isHome ? " flex items-center" : '' }`}>
 		<slot />
 	</body>
 </html>

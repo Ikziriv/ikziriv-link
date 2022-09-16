@@ -1,13 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import CardSvelte from '../components/Card.svelte';
+import CardSvelte from '../components/card/Card.svelte';
+import RootScreen from '../components/screen/RootScreen.svelte';
+
+import ToggleTheme from '../components/toggle/ToggleTheme.astro';
+import ToggleMode from '../components/toggle/ToggleMode.astro';
 import { Icon } from 'astro-icon';
+
+let iconActive: boolean = false;
 ---
 
-<Layout>
-	<main class="flex flex-col justify-center items-center h-screen">
-		<div class="flex justify-between items-center w-full h-auto">
+<Layout
+	title="Ikziriv Art"
+>
+	<RootScreen >
+	<main class="flex flex-col justify-center items-center w-full h-screen bg-transparent">
+		<div class="flex justify-between items-center w-full h-auto mb-2">
 			<div class="flex justify-center items-center space-x-2">
 				<div class="w-16 h-16 rounded-full bg-zinc-300 shadow-md shadow-zinc-100 relative">
 					<img class="w-16 h-auto rounded-full" src="https://avatars.githubusercontent.com/u/12673169?v=4" alt="Ikziriv Profile">
@@ -20,18 +28,32 @@ import { Icon } from 'astro-icon';
 					<span class="text-sm">Programmer & Designer</span>
 				</div>
 			</div>
-			<div class="w-8 h-8 bg-zinc-100 border rounded-full">
-				
+			<div class="flex flex-row space-x-1 justify-center items-center w-auto h-auto">
+				<div class="w-auto h-auto">
+					<ToggleTheme />
+				</div>
+
+				<div class="w-auto h-auto">
+					<ToggleMode />
+				</div>
 			</div>
 		</div>
 		<div role="list" class="grid grid-cols-1 gap-1 link-card-grid w-full">
-			<CardSvelte />
+			<CardSvelte iconActive={iconActive} />
 		</div>
-		<p class="instructions text-white">
-			Check out the <code>src/pages</code> directory to get started.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
+		<div class="instructions flex flex-row space-x-1 justify-center items-center text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-900">
+			<div class="w-12 h-12 flex justify-center items-center border">
+				<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:behance" />
+			</div>
+			<div class="w-12 h-12 flex justify-center items-center border">
+				<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:instagram" />
+			</div>
+			<div class="w-12 h-12 flex justify-center items-center border">
+				<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:dribbble" />
+			</div>
+		</div>
 	</main>
+	</RootScreen>
 </Layout>
 
 <style>
@@ -73,10 +95,8 @@ import { Icon } from 'astro-icon';
 	.instructions {
 		line-height: 1.6;
 		margin: 1rem 0;
-		background: #0c0c0c;
 		padding: 1rem;
 		border-radius: 0.4rem;
-		color: var(--color-bg);
 	}
 
 	.instructions code {

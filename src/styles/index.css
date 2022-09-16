@@ -1,10 +1,41 @@
+@import "@radix-ui/colors/slate.css";
+@import "@radix-ui/colors/slateDark.css";
+@import "@radix-ui/colors/blackA.css";
+@import "@radix-ui/colors/whiteA.css";
+@import "@radix-ui/colors/blue.css";
+@import "@radix-ui/colors/blueDark.css";
+@import "@radix-ui/colors/yellow.css";
+@import "@radix-ui/colors/yellowDark.css";
+@import "@radix-ui/colors/red.css";
+@import "@radix-ui/colors/redDark.css";
+@import "@radix-ui/colors/green.css";
+@import "@radix-ui/colors/greenDark.css";
+@import "@radix-ui/colors/orange.css";
+@import "@radix-ui/colors/orangeDark.css";
+@import "@radix-ui/colors/pink.css";
+@import "@radix-ui/colors/pinkDark.css";
+@import "@radix-ui/colors/violet.css";
+@import "@radix-ui/colors/violetDark.css";
+
+:root {
+  --hiContrast: var(--slate12);
+  --loContrast: white;
+  --c-bg: #fff;
+  --c-scrollbar: #eee;
+  --c-scrollbar-hover: #bbb;
+}
+
+.dark-theme {
+  --hiContrast: white;
+  --loContrast: black;
+  --c-bg: #050505;
+  --c-scrollbar: #111;
+  --c-scrollbar-hover: #222;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-	color-scheme: light dark;
-}
 
 ::selection {
 	@apply bg-cyan-400 bg-opacity-50 text-white;
@@ -13,12 +44,7 @@
 html {
 	scroll-behavior: smooth;
 }
-
-html,
 body {
-	@apply h-full;
-}
-
-body {
-	@apply overflow-y-scroll;
+	color: var(--hiContrast);
+	background-color: var(--loContrast);
 }

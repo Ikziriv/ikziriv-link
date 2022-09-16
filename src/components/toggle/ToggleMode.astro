@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon";
+---
+
+<button
+  type="button"
+  class="flex justify-center items-center w-8 h-8 bg-white shadow border rounded-full"
+  aria-label="toggle dark mode"
+  id="dark-mode-toggle"
+>
+  <span class="dark:hidden block">
+    <Icon name="feather:moon" aria-hidden class="h-3 w-3 text-zinc-900" />
+  </span>
+  <span class="dark:block hidden">
+    <Icon name="feather:sun" aria-hidden class="h-3 w-3 text-zinc-900" />
+  </span>
+</button>
+
+<script>
+const darkModeToggle = document.querySelector("#dark-mode-toggle");
+function toggleDarkMode() {
+    const root = document.documentElement;
+    const isDarktheme = root.classList.contains("dark-theme");
+    if (isDarktheme) {
+    root.classList.remove("dark-theme");
+    root.classList.add("light-theme");
+    } else {
+    root.classList.add("dark-theme");
+    root.classList.remove("light-theme");
+    }
+    const theme = JSON.parse(root.getAttribute("data-theme") as string);
+    document.cookie = `__theme_nfz=${JSON.stringify({
+    mode: isDarktheme ? "light-theme" : "dark-theme",
+    theme: theme.theme,
+    })}; SameSite=Lax; Secure; path=/`;
+}
+if (darkModeToggle) {
+    darkModeToggle.addEventListener("click", () => {
+    toggleDarkMode();
+    });
+}
+</script>
