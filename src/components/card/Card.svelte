@@ -17,26 +17,26 @@
         {
             title: 'Instagram',
             url: 'https://instagram.com/ikziriv.art',
-            description: ' Instagram Link',
+            description: ' Instagram',
             iconName: 'bi:instagram',
         },
         {
             title: 'Behance',
             url: 'https://behance.com/ikziriv.art',
-            description: ' Behance Link',
+            description: ' Behance',
             iconName: 'bi:behance',
         },
         {
             title: 'Dribbble',
             url: 'https://dribble.com/ikziriv.art',
-            description: ' Dribble Link',
+            description: ' Dribble',
             iconName: 'bi:dribbble',
         },
     ]
 </script>
 
 {#each LinkList as link}
-<a href={link.url} target="_blank" class="col-span-full flex justify-between items-center w-auto h-auto py-2 shadow-md hover:shadow-lg shadow-zinc-200 rounded-xl">
+<a href={link.url} target="_blank" class="col-span-full bg-zinc-100 dark:bg-zinc-900 flex justify-between items-center w-auto h-auto py-2 shadow-md hover:shadow-lg shadow-zinc-200 dark:shadow-zinc-800 rounded-xl">
     <div class="flex flex-row w-auto h-auto space-x-4">
         {#if iconActive}
         <div class="w-12 h-12 flex justify-center items-center border">
@@ -48,7 +48,7 @@
                 {link.title}
             </span>
             <p class="text-xs w-full h-auto -mt-1">
-                {link.description}
+                <span class="font-medium">Link :</span> {link.description}
             </p>
         </div>
     </div>

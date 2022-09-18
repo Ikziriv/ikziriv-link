@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CardSvelte from '../components/card/Card.svelte';
+import CardFooter from '../components/card/CardFooter.svelte';
 import RootScreen from '../components/screen/RootScreen.svelte';
 
 import ToggleTheme from '../components/toggle/ToggleTheme.astro';
@@ -14,42 +15,51 @@ let iconActive: boolean = false;
 	title="Ikziriv Art"
 >
 	<RootScreen >
-	<main class="flex flex-col justify-center items-center w-full h-screen bg-transparent">
-		<div class="flex justify-between items-center w-full h-auto mb-2">
-			<div class="flex justify-center items-center space-x-2">
-				<div class="w-16 h-16 rounded-full bg-zinc-300 shadow-md shadow-zinc-100 relative">
-					<img class="w-16 h-auto rounded-full" src="https://avatars.githubusercontent.com/u/12673169?v=4" alt="Ikziriv Profile">
-					<div class="absolute bottom-0 -right-1 flex justify-center items-center w-5 h-5 rounded-full bg-blue-500">
-						<Icon class="w-3 w-3 text-white" name="bi:check-lg" />
+	<main class="flex justify-center items-center w-full h-screen bg-zinc-100/50 dark:bg-zinc-900/50">
+		<div class="flex flex-col justify-center items-center w-full h-auto max-w-xl bg-transparent">
+			<div class="flex justify-between items-center w-full h-auto mb-2">
+				<div class="flex justify-center items-center space-x-2">
+					<div class="w-16 h-16 rounded-full bg-zinc-300 shadow-md shadow-zinc-100 dark:shadow-zinc-900 relative">
+						<img class="w-16 h-auto rounded-full" src="https://avatars.githubusercontent.com/u/12673169?v=4" alt="Ikziriv Profile">
+						<div class="absolute bottom-0 -right-1 flex justify-center items-center w-5 h-5 rounded-full bg-blue-500">
+							<Icon class="w-3 w-3 text-white" name="bi:check-lg" />
+						</div>
+					</div>
+					<div class="flex flex-col w-auto h-auto leading-none">
+						<div class="title relative inline-flex flex-col-reverse sm:flex-row">
+							<div class="relative inline-block font-bold tracking-tight">
+								<span class="text-gradient">Rizky Ivan Darmawan</span>
+								<span class="title-cover absolute inset-0 transition-opacity duration-500 print:hidden" aria-hidden="true">
+									Rizky Ivan Darmawan
+								</span>
+							</div>
+						</div>
+						<span class="text-sm transition-color duration-300 hover:text-slate-800">Programmer & Designer</span>
 					</div>
 				</div>
-				<div class="flex flex-col w-auto h-auto leading-none">
-					<span class="text-gradient">Rizky Ivan Darmawan</span>
-					<span class="text-sm">Programmer & Designer</span>
-				</div>
-			</div>
-			<div class="flex flex-row space-x-1 justify-center items-center w-auto h-auto">
-				<div class="w-auto h-auto">
-					<ToggleTheme />
-				</div>
+				<div class="flex flex-row space-x-1 justify-center items-center w-auto h-auto">
+					<div class="w-auto h-auto">
+						<ToggleTheme />
+					</div>
 
-				<div class="w-auto h-auto">
-					<ToggleMode />
+					<div class="w-auto h-auto">
+						<ToggleMode />
+					</div>
 				</div>
 			</div>
-		</div>
-		<div role="list" class="grid grid-cols-1 gap-1 link-card-grid w-full">
-			<CardSvelte iconActive={iconActive} />
-		</div>
-		<div class="instructions flex flex-row space-x-1 justify-center items-center text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-900">
-			<div class="w-12 h-12 flex justify-center items-center border">
-				<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:behance" />
+			<div role="list" class="grid grid-cols-1 gap-1 link-card-grid w-full">
+				<CardSvelte iconActive={iconActive} />
 			</div>
-			<div class="w-12 h-12 flex justify-center items-center border">
-				<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:instagram" />
-			</div>
-			<div class="w-12 h-12 flex justify-center items-center border">
-				<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:dribbble" />
+			<div class="instructions flex flex-row space-x-1 justify-center items-center text-zinc-900 dark:text-white bg-zinc-100 dark:bg-zinc-900">
+				<CardFooter classes="text-normal">
+					<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:behance" />
+				</CardFooter>
+				<CardFooter classes="text-normal">
+					<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:instagram" />
+				</CardFooter>
+				<CardFooter classes="text-normal">
+					<Icon class="w-6 w-6 text-zinc-900 dark:text-zinc-100" name="bi:dribbble" />
+				</CardFooter>
 			</div>
 		</div>
 	</main>
@@ -58,28 +68,29 @@ let iconActive: boolean = false;
 
 <style>
 	:root {
-		--astro-gradient: linear-gradient(0deg, #747474, #252525);
+		--astro-gradient: linear-gradient(
+			to right,
+			#d3f8e2 0%,
+			#e4c1f9 25%,
+			#f694c1 50%,
+			#ede7b1 75%,
+			#a9def9 100%
+		);
 	}
 
 	h1 {
 		margin: 2rem 0;
 	}
 
-	main {
-		margin: auto;
-		padding: 1em;
-		max-width: 60ch;
-	}
-
 	.text-gradient {
 		font-weight: 900;
 		background-image: var(--astro-gradient);
+		background-size: 100% 200%;
+		background-clip: text;
+		text-fill-color: transparent;
+		animation: slide 10s linear infinite;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		background-size: 100% 200%;
-		background-position-y: 100%;
-		border-radius: 0.4rem;
-		animation: pulse 4s ease-in-out infinite;
 	}
 
 	@keyframes pulse {

@@ -48,3 +48,7 @@ body {
 	color: var(--hiContrast);
 	background-color: var(--loContrast);
 }
+
+.title:hover .title-cover {
+	@apply opacity-0;
+}
