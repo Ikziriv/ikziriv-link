@@ -2,7 +2,7 @@
 import '../styles/index.css';
 import SEO from '../components/SEO.astro';
 import { MAXIMUM_THEME_INDEX } from "../constants";
-import { getThemeCookie } from "../utils/theme";
+import { getThemeCookie } from "../utilities/theme";
 
 const { pathname } = Astro.url
 const isHome = pathname === '/';
